@@ -153,11 +153,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "*",
+    "http://localhost:8000", "https://example.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "*",
+    "http://localhost:8000", "https://example.com"
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
