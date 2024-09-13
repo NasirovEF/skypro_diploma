@@ -5,6 +5,8 @@ from users.services import NULLABLE
 
 
 class User(AbstractUser):
+    """Модель пользователя"""
+
     username = None
     first_name = models.CharField(max_length=15, verbose_name="Имя", **NULLABLE)
     last_name = models.CharField(max_length=25, verbose_name="Фамилия", **NULLABLE)

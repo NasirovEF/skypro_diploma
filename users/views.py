@@ -1,16 +1,20 @@
 import secrets
-from rest_framework.response import Response
+
 from django.core.mail import send_mail
+from django.http import Http404
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from django.http import Http404
+from rest_framework.response import Response
+
 from config.settings import EMAIL_HOST_USER
 from users.models import User
 from users.serializers import UserResetPassword, UserSerializer
 
 
 class UserCreate(generics.CreateAPIView):
+    """Вьюшка создания пользователя"""
+
     serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
@@ -21,9 +25,14 @@ class UserCreate(generics.CreateAPIView):
         user.save()
 
 
-@api_view(["PUT",])
+@api_view(
+    [
+        "PUT",
+    ]
+)
 @permission_classes([AllowAny])
 def user_reset_password(request):
+    """Вьюшка для инициализации сброса пароля"""
     try:
         user = User.objects.get(email=request.data.get("email"))
     except User.DoesNotExist:
@@ -48,9 +57,14 @@ def user_reset_password(request):
             )
 
 
-@api_view(["PUT",])
+@api_view(
+    [
+        "PUT",
+    ]
+)
 @permission_classes([AllowAny])
 def user_reset_password_confirm(request, pk, token_for_password):
+    """Вьюшка для подтверждения сброса пароля"""
     try:
         user = User.objects.get(pk=pk, token_for_password=token_for_password)
     except User.DoesNotExist:

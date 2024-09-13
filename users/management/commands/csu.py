@@ -11,6 +11,7 @@ load_dotenv(dotenv_path=dot_env)
 
 
 class Command(BaseCommand):
+    """Команда создания суперпользователя"""
 
     def handle(self, *args, **options):
         user = User.objects.create(
