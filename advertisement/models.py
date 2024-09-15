@@ -33,8 +33,8 @@ class Ad(models.Model):
 class Feedback(models.Model):
     """Модель отзыва"""
     text = models.TextField(verbose_name="Текст отзыва")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор отзыва", related_name="feedback", **NULLABLE)
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE, verbose_name="Объявление", related_name="feedback", **NULLABLE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор отзыва", related_name="feedback")
+    ad = models.ForeignKey(Ad, on_delete=models.CASCADE, verbose_name="Объявление", related_name="feedback")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата и время создания отзыва")
 
     class Meta:
