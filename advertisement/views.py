@@ -1,6 +1,6 @@
 
 from rest_framework import viewsets
-
+from rest_framework.filters import SearchFilter, OrderingFilter
 from advertisement.paginations import AdListViewPagination
 from advertisement.permissions import IsOwnerPermission
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
@@ -13,6 +13,9 @@ class AdViewSet(viewsets.ModelViewSet):
 
     queryset = Ad.objects.all()
     pagination_class = AdListViewPagination
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ["title", "description"]
+    ordering_fields = ["price"]
 
     def get_serializer_class(self):
         if self.request.user.is_authenticated:
